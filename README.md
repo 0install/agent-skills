@@ -17,6 +17,29 @@ The skill teaches the agent to:
 
 Zero Install does not need to be installed beforehand. The skill bundles the [bootstrap scripts](https://get.0install.net/) `0install.sh` and `0install.ps1`, which download Zero Install into the per-user cache on first use. It works on Windows, Linux and macOS.
 
+### `0install-feed`
+
+Lets an agent package a program for Zero Install: write a feed template, generate the feed for a release with [0template](https://docs.0install.net/tools/0template/), then lint and test-run it locally.
+
+The skill teaches the agent to:
+
+- gather what a feed needs (metadata, download URLs, platforms, runtime) from the project
+- write the template, with recipes for .NET, Java, Python and native Windows, Linux and macOS packages as well as libraries
+- verify the generated feed with feedlint, `0install select` and `0install run`
+- write a local feed to run a source checkout without a release
+
+### `0install-publish`
+
+Lets an agent publish a feed so that anyone can run the app with `0install run <url>`.
+
+The skill teaches the agent to:
+
+- build and sign the master feed with [0publish](https://docs.0install.net/tools/0publish/) and host it on GitHub Pages or another static web host
+- add new versions and edit a published feed
+- set up a GitHub Actions workflow that publishes a new version on every tag push
+- wrap the app in an installer with [0bootstrap](https://docs.0install.net/tools/0bootstrap/)
+- leave key handling to you, and ask before signing or pushing anything
+
 ## Installation
 
 With the [`skills` CLI](https://github.com/vercel-labs/skills):
@@ -25,4 +48,4 @@ With the [`skills` CLI](https://github.com/vercel-labs/skills):
 npx skills add 0install/agent-skills
 ```
 
-Or copy `skills/0install` into your agent's skills directory, e.g. `.claude/skills/` in a project or `~/.claude/skills/` for Claude Code.
+Or copy the folders under `skills/` into your agent's skills directory, e.g. `.claude/skills/` in a project or `~/.claude/skills/` for Claude Code.
